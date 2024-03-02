@@ -18,6 +18,7 @@ struct WeatherManager {
     
     func fetchWeather(for city: String) {
         let urlString = "\(baseUrl)&q=\(city)"
+        print(urlString)
         performRequest(urlString: urlString)
     }
     
@@ -37,7 +38,7 @@ struct WeatherManager {
                 if let safeData = data {
 
                     if let weather = self.parseJson(weatherData: safeData) {
-                        
+                        self.delegate?.didUpdateWeather(self, weather: weather)
                     }
                 }
                 
